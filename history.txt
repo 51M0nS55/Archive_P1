@@ -1,0 +1,31 @@
+mkdir -p p1_basic_unix/{test/{basic,composite},cache/{data/{tables,directory_list},images},src/{graphic,exe,utilities}}
+cd p1_basic_unix
+touch test/basic/test_1.txt test/basic/test_2.txt test/basic/test_3.txt
+
+# Writing name and date to test_1.txt
+echo "Your Name - $(date)" > test/basic/test_1.txt
+cat test/basic/test_1.txt
+ls -l test/basic
+chmod +x test/basic/test_1.txt
+ls -l test/basic >> test/basic/test_2.txt
+
+# Downloading and extracting P1_B.tar.gz using wget
+wget -O P1_B.tar.gz <URL_PLACEHOLDER>
+tar -xzvf P1_B.tar.gz -C .
+mv P1_B/example.sh .
+
+mv P1_B/example1.txt demo_1.txt
+mv P1_B/example2.txt demo_2.txt
+
+mv demo_1.txt src/exe/
+mv demo_2.txt cache/data/tables/
+rm -r P1_B
+ln -s src/exe/demo_1.txt demo_link
+
+alias ll="ls -l"
+
+# Using grep and find commands for statistics and creating output files
+grep "statistics" test/basic/test_1.txt | tee src/utilities/grep_stat_demo1.txt
+grep -r "statistics" . | tee cache/images/grep_stat_all.txt
+find . -name "*.txt" > test/basic/test_3.txt
+find . -name "*.txt" -exec grep "statistics" {} +
